@@ -1,0 +1,114 @@
+package probleme;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Probleme {
+
+
+    //Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+    public static boolean p1(){
+
+        String s = "ana";
+
+        String t = "naa";
+
+        char[] cS = s.toCharArray();
+        char[] cT= t.toCharArray();
+
+        Arrays.sort(cS);
+        Arrays.sort(cT);
+
+        return Arrays.equals(cS, cT);
+
+    }
+
+
+    // Write a function that reverses a string. The input string is given as an array of characters s.
+    public static void p2(){
+
+        char[] s = {'h','e','l','l','o'};
+
+        int stanga = 0;
+
+        int dreapta = s.length - 1;
+
+
+        while (stanga < dreapta) {
+            char temp = s[stanga];
+            s[stanga] = s[dreapta];
+            s[dreapta] = temp;
+            stanga++;
+            dreapta--;
+        }
+
+        System.out.println(s);
+
+    }
+
+
+    // Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
+    public static int p3(){
+
+        String s = "leetcode";
+        int ok =0;
+
+        for(int i =0; i <s.length()-2;i++){
+
+            char temp = s.charAt(i);
+            for(int j = 1;j <s.length()-1;j++){
+                if(temp == s.charAt(j)){
+                    ok = 1;
+                }
+            }
+
+            if(ok == 0){
+                return i;
+            }
+        }
+
+        return -1;
+
+    }
+
+
+    //Given an integer n, return a string array answer (1-indexed) where:
+    //
+    //answer[i] == "FizzBuzz" if i is divisible by 3 and 5.
+    //answer[i] == "Fizz" if i is divisible by 3.
+    //answer[i] == "Buzz" if i is divisible by 5.
+    //answer[i] == i (as a string) if none of the above conditions are true.
+    public static void p4(int n){
+
+        ArrayList<String> list = new ArrayList<>();
+
+        for(int i =1 ; i <= n;i++){
+            if(i % 3== 0 && i % 5 == 0){
+                list.add("FizzBuzz");
+            }
+            else if(i % 3== 0){
+                list.add("Fizz");
+            }
+            else if(i % 5 == 0){
+                list.add("Buzz");
+            }else{
+                list.add(String.valueOf(i));
+            }
+        }
+
+        for(int i =0 ; i < list.size();i ++){
+            System.out.println(list.get(i));
+        }
+
+
+    }
+
+
+    // Given a valid (IPv4) IP address, return a defanged version of that IP address.
+    public static String p5(String address){
+
+        return address.replace(".", "[.]");
+
+    }
+
+}
