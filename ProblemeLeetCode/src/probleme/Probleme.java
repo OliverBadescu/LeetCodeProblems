@@ -111,4 +111,52 @@ public class Probleme {
 
     }
 
+
+    // Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+    public static int p6(int [] nums, int val){
+
+        int ct = 0;
+
+        for(int i =0; i < nums.length;i++){
+            if (nums[i] != val) {
+                nums[ct] = nums[i];
+                ct++;
+            }
+        }
+        return ct;
+
+    }
+
+
+    // Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+    public static int p7(int[] nums){
+
+        int[] frec = new int[256];
+
+        for(int i =0; i < nums.length; i++){
+            frec[nums[i]]++;
+        }
+
+        for(int i =0 ; i < frec.length;i++){
+            if(frec[i] == 1){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    //Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+    public static int p8(int[] nums){
+
+        int n = nums.length;
+        int sum = n * (n+1)/2;
+        int sum2 = 0;
+        for(int i =0; i < n;i++){
+            sum2 += nums[i];
+        }
+
+        return sum - sum2;
+
+    }
+
 }
