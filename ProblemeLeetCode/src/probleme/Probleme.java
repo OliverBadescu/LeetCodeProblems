@@ -159,4 +159,72 @@ public class Probleme {
 
     }
 
+
+    // Given an integer num, repeatedly add all its digits until the result has only one digit, and return it.
+    public static int p9(int n){
+
+        if( n < 10){
+            return n;
+        }
+
+        int temp = n;
+
+        while(temp > 9){
+            temp = suma(temp);
+        }
+
+        return temp;
+
+    }
+
+    private static int suma(int n){
+
+        int s =0;
+        while(n!= 0){
+            int l = n % 10;
+            s += l;
+            n = n/10;
+        }
+        return s;
+    }
+
+
+    //Write a function that reverses a string. The input string is given as an array of characters s.
+    public static void p10(char[] s){
+
+        int stanga = 0;
+
+        int dreapta = s.length - 1;
+
+
+        while (stanga < dreapta) {
+            char temp = s[stanga];
+            s[stanga] = s[dreapta];
+            s[dreapta] = temp;
+            stanga++;
+            dreapta--;
+        }
+
+    }
+    
+
+    //Given an integer num, return the number of steps to reduce it to zero.
+    //In one step, if the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.
+    public static int p11(int num) {
+
+        return calc(num, 0);
+
+    }
+
+    static int calc(int num, int count){
+        if(num == 0){
+            return count;
+        }
+        if(num%2 == 0){
+            return calc(num/2, count+1);
+        }else{
+            return calc(num-1, count+1);
+        }
+    }
+
 }
