@@ -2,6 +2,7 @@ package probleme;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Probleme {
 
@@ -226,5 +227,85 @@ public class Probleme {
             return calc(num-1, count+1);
         }
     }
+
+
+    // A school is trying to take an annual photo of all the students. The students are asked to stand in a single file line in non-decreasing order by height.
+    // Let this ordering be represented by the integer array expected where expected[i] is the expected height of the ith student in line.
+    public static int p12(int[] heights){
+
+        int[] temp = heights.clone();
+        int ct = 0;
+        sort(heights);
+
+        for(int i =0; i < heights.length; i++){
+            if(temp[i] != heights[i]){
+                ct++;
+            }
+        }
+
+        return ct;
+
+    }
+    public static void sort(int[] v){
+
+        for(int i =0 ; i < v.length-1; i++){
+            for(int j = i+1; j < v.length; j++){
+                if(v[i] > v[j]){
+                    int temp = v[i];
+                    v[i] = v[j];
+                    v[j] = temp;
+                }
+            }
+        }
+
+    }
+
+
+    //Given an integer array nums, in which exactly two elements appear only once and all the other elements appear exactly twice. Find the two elements that appear only once.
+    // You can return the answer in any order.
+
+    public static int[] p13(int[] nums){
+        int[] result = new int[2];
+        int index = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            boolean found = false;
+            for (int j = 0; j < nums.length; j++) {
+                if (i != j && nums[i] == nums[j]) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                result[index++] = nums[i];
+                if (index == 2) {
+                    break;
+                }
+            }
+        }
+
+        return result;
+
+    }
+
+    // Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears once or twice,
+    // return an array of all the integers that appears twice.
+
+    public static List<Integer> p14(int[] nums){
+
+        List<Integer> result = new ArrayList<>();
+        int n = nums.length;
+
+        for(int i =0; i < n; i++){
+            for(int j = i+1; j < n; j++){
+                if(nums[i] == nums[j]){
+                    result.add(nums[i]);
+                }
+            }
+        }
+        return result;
+    }
+
+
 
 }
