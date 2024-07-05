@@ -307,5 +307,148 @@ public class Probleme {
     }
 
 
+    // Given an integer x, return true if x is a palindrome, and false otherwise.
+    public static boolean p15(int x){
+
+        if (x < 0){
+            return false;
+        }
+
+        int reverse = 0;
+        int temp = x;
+
+        while (temp != 0){
+            int d = temp % 10;
+            reverse = reverse * 10 + d;
+            temp/=10;
+        }
+        return (reverse == x);
+
+    }
+
+
+    //You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer.
+    // The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
+    public static int[] p16(int[] digits){
+        for (int i = digits.length - 1; i >= 0; i--) {
+            if (digits[i] < 9) {
+                digits[i]++;
+                return digits;
+            }
+            digits[i] = 0;
+        }
+
+        digits = new int[digits.length + 1];
+        digits[0] = 1;
+        return digits;
+    }
+
+
+    // Given an integer n, return true if it is a power of two. Otherwise, return false.
+    public static boolean p17(int n){
+
+        if (n <= 0) {
+            return false;
+        }
+        if (n == 1) {
+            return true;
+        }
+        if (n % 2 == 1) {
+            return false;
+        }
+        return p17(n / 2);
+
+    }
+
+
+    //Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+
+    public static int p18(String s) {
+        char[] list = s.toCharArray();
+        int val = 0;
+
+        for (int i = 0; i < list.length; i++) {
+
+            if (i+1 < list.length){
+                if (list[i+1] == 'V' && list[i] == 'I'){
+                    val+=4;
+                    i++;
+                    continue;
+                }
+                else if (list[i+1] == 'X' && list[i] == 'I'){
+                    val+=9;
+                    i++;
+                    continue;
+                }
+                else if (list[i+1] == 'L' && list[i] == 'X'){
+                    val+=40;
+                    i++;
+                    continue;
+                }
+                else if (list[i+1] == 'C' && list[i] == 'X'){
+                    val+=90;
+                    i++;
+                    continue;
+                }
+                else if (list[i+1] == 'D' && list[i] == 'C'){
+                    val+=400;
+                    i++;
+                    continue;
+                }
+                else if (list[i+1] == 'M' && list[i] == 'C'){
+                    val+=900;
+                    i++;
+                    continue;
+                }
+            }
+
+            if (list[i] == 'I') {
+                val += 1;
+            } else if (list[i] == 'V') {
+                val += 5;
+            } else if (list[i] == 'X') {
+                val += 10;
+            } else if (list[i] == 'L') {
+                val += 50;
+            } else if (list[i] == 'C') {
+                val += 100;
+            } else if (list[i] == 'D') {
+                val += 500;
+            } else if (list[i] == 'M') {
+                val += 1000;
+            }
+        }
+        return val;
+    }
+
+
+    // Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+    public static int p19(String haystack, String needle){
+        return haystack.indexOf(needle);
+    }
+
+
+    //Given a sorted array of distinct integers and a target value, return the index if the target is found.
+    // If not, return the index where it would be if it were inserted in order.
+    public static int p20(int[] nums, int target){
+
+        if(target == 0){
+            return 0;
+        }
+
+        for(int i = 0 ; i < nums.length-1;i++){
+            if(nums[i] == target){
+                return i;
+            }
+            if(nums[i] < target && target < nums[i+1]){
+                return i+1;
+            }
+        }
+
+        return nums.length;
+
+    }
+
+
 
 }
