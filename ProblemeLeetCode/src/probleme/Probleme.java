@@ -463,5 +463,38 @@ public class Probleme {
     }
 
 
+    //Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+    public static int p22(int x) {
+        int nou =0;
+
+
+        while(x!=0){
+
+            int uc = x % 10;
+            nou = nou * 10 + uc;
+            x /= 10;
+        }
+
+        return nou;
+    }
+
+
+    //Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+    public static int p23(int[]nums){
+
+        int j = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[i - 1]) {
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        return j;
+    }
+
+
+    //
+
+
 
 }
