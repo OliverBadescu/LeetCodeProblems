@@ -493,8 +493,90 @@ public class Probleme {
     }
 
 
-    //
+    //Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well.
+    public static int p24(int x){
+        int l=1;
+        int r=x;
+        while(l<=r){
+            int m=(r-l)/2+l;
+            if(m>x/m) {
+                r=m-1;
+            }
+            else if(m<x/m) {
+                l=m+1;
+            }
+            else return m;
+        }
+        return r;
 
+
+    }
+
+
+    //Given an array nums of size n, return the majority element.
+    //The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+    public static int p25(int[] nums){
+
+        int[] frec = new int[1000];
+
+        int n = nums.length;
+
+        for(int i =0; i < n;i++){
+            frec[nums[i]]++;
+        }
+
+        for(int i =0 ; i < frec.length;i++){
+            if(i > n / 2 ){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    //Write an algorithm to determine if a number n is happy.
+    public static boolean p26(int n){
+
+        int sum = n;
+
+        while(sum!= 1){
+            sum = calc(sum);
+        }
+        return true;
+    }
+
+    public static int calc(int n){
+
+        int sum =0;
+        while(n != 0){
+            int uc = n % 10;
+            sum = sum + uc * uc;
+            n/=10;
+        }
+
+        return sum;
+
+    }
+
+    //Given an integer n, return true if n is an ugly number.
+    //An ugly number is a positive integer whose prime factors are limited to 2, 3, and 5.
+    public static boolean p27(int n){
+
+        while (n>1) {
+            if (n % 5 == 0) {
+                n = n / 5;
+            } else if (n % 3 == 0){
+            n = n / 3;
+        }
+            else if (n%2==0) {
+                n = n / 2;
+            }
+            else {
+                break;
+            }
+        }
+        return n==1;
+
+    }
 
 
 }

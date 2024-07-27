@@ -3,9 +3,9 @@ import probleme.Probleme;
 public class Main {
     public static void main(String[] args) {
 
-        int[] t = {1,1,2};
+        int[] t = {3,2,3, 3};
 
-        System.out.println(Probleme.p23(t));
+        System.out.println(Probleme.p26(2));
 
 
     }
