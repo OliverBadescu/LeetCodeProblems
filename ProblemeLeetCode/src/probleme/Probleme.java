@@ -579,4 +579,46 @@ public class Probleme {
     }
 
 
+    //Given an integer array nums, return the third distinct maximum number in this array. If the third maximum does not exist, return the maximum number.
+    public static int p28(int[] nums){
+
+        Arrays.sort(nums);
+        int c=0;
+        for(int i=nums.length-1;i>0;i--){
+            if(nums[i]!=nums[i-1]){
+                c++;
+            }
+            if(c==2){
+                return nums[i-1];
+            }
+        }
+        return nums[nums.length-1];
+    }
+
+
+    //A perfect number is a positive integer that is equal to the sum of its positive divisors, excluding the number itself. A divisor of an integer x is an integer that can divide x evenly.
+    public static boolean p29(int num){
+
+
+        int sum =0;
+        for(int i =1; i <= num;i++){
+            if(num % i ==0){
+                sum+= i;
+            }
+        }
+        if(sum == num){
+            return true;
+        }
+        return false;
+    }
+
+
+    //The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,
+    public static int p30(int n){
+        if(n<2){
+            return n;
+        }
+        return p30(n-1)+p30(n-2);
+    }
+
 }
