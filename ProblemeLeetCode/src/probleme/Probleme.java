@@ -1,8 +1,6 @@
 package probleme;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Probleme {
 
@@ -620,5 +618,188 @@ public class Probleme {
         }
         return p30(n-1)+p30(n-2);
     }
+
+
+    //Implement a last-in-first-out (LIFO) stack using only two queues. The implemented stack should support all the functions of a normal stack (push, top, pop, and empty).
+    static class p31{
+
+        private Queue<Integer> queue = new LinkedList<>();
+
+
+        public void push(int x) {
+            queue.add(x);
+            for(int i = 1;i<queue.size();i++) {
+                queue.add(queue.remove());
+            }
+        }
+
+        public int pop() {
+            return queue.remove();
+        }
+
+        public int top() {
+            return queue.peek();
+        }
+
+        public boolean empty() {
+            return queue.isEmpty();
+        }
+
+    }
+
+
+    //There are n people in a line queuing to buy tickets, where the 0th person is at the front of the line and the (n - 1)th person is at the back of the line.
+
+    public static int p32(int[] tickets, int k){
+
+        int time =0;
+
+        for(int i = 0 ;i < tickets.length;i++){
+            if(i <= k) {
+                time += Math.min(tickets[k], tickets[i]);
+            }
+            else {
+                time += Math.min(tickets[k] - 1, tickets[i]);
+            }
+        }
+        return time;
+        
+
+    }
+
+
+    // Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses. ????
+
+    public static List<String> p33(int n){
+        return null;
+
+    }
+
+
+    //Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
+    public static int p34(int[] nums, int target){
+        for(int i =0 ; i < nums.length;i++){
+            if (target == nums[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    // Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+    public static int[] p35(int[] nums, int target){
+
+        int i = 0;
+        int j = nums.length-1;
+        int len[] = {-1 , -1};
+        if(nums.length == 1)
+        {
+            if(nums[0] == target)
+            {
+                return new int[]{0, 0};
+            }
+            return new int[]{-1, -1};
+        }
+        while(i <= j)
+        {
+            if(nums[i] != target)
+            {
+                i++;
+            }
+            if(nums[j] != target)
+            {
+                j--;
+            }
+            if(nums[i] == target && nums[j] == target)
+            {
+                len[0] = i;
+                len[1] = j;
+                break;
+            }
+        }
+        return len;
+    }
+
+
+    //Given an integer array nums, find the
+    //subarray
+    // with the largest sum, and return its sum.
+    public static int p36(int[] nums){
+
+        int rez = nums[0];
+        int sum =0;
+
+        for(int i =0; i < nums.length;i++){
+            if(sum < 0){
+                sum = 0;
+            }
+            sum += nums[i];
+            rez = Math.max(rez, sum);
+
+        }
+
+        return rez;
+
+    }
+
+
+    // An array is considered special if every pair of its adjacent elements contains two numbers with different parity.
+
+    public static boolean p37(int[] nums){
+
+
+        for(int i = 0; i < nums.length-1;i++){
+            if ((nums[i] % 2) == (nums[i + 1] % 2)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    // For each queries[i], you need to find the index of the queries[i]th occurrence of x in the nums array. If there are fewer than queries[i] occurrences of x, the answer should be -1 for that query.
+    public static int[] p38(int[] nums, int[] queries, int x){
+
+        List<Integer> oc = new ArrayList<>();
+
+        for(int i=0; i < nums.length;i++){
+            if(nums[i] == x){
+                oc.add(i);
+            }
+        }
+
+        int[] rez = new int[queries.length];
+        for(int i =0; i < queries.length;i++){
+            if(queries[i] <= oc.size()){
+                rez[i] = oc.get(queries[i] -1);
+            }else{
+                rez[i] = -1;
+            }
+
+        }
+        return rez;
+    }
+
+
+    //Your laptop keyboard is faulty, and whenever you type a character 'i' on it, it reverses the string that you have written. Typing other characters works as expected.
+    public static String p39(String s){
+
+        StringBuilder rez = new StringBuilder();
+
+        for(int i =0; i < s.length();i++){
+            if(s.charAt(i) != 'i'){
+                rez.append(s.charAt(i));
+            }
+            if(s.charAt(i) == 'i'){
+                rez.reverse();
+            }
+
+        }
+        return rez.toString();
+    }
+
+
+
 
 }
