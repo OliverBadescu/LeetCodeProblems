@@ -800,6 +800,39 @@ public class Probleme {
     }
 
 
+    //You have a list arr of all integers in the range [1, n] sorted in a strictly increasing order. Apply the following algorithm on arr:
+    //
+    //Starting from left to right, remove the first number and every other number afterward until you reach the end of the list.
+    //Repeat the previous step again, but this time from right to left, remove the rightmost number and every other number from the remaining numbers.
+    //Keep repeating the steps again, alternating left to right and right to left, until a single number remains.
+    //Given the integer n, return the last number that remains in arr.
+    public static int p40( int n){
 
+        boolean left = true;
+        int remaining = n;
+        int step = 1;
+        int head = 1;
+        while (remaining > 1) {
+            if (left || remaining % 2 ==1) {
+                head = head + step;
+            }
+            remaining = remaining / 2;
+            step = step * 2;
+            left = !left;
+        }
+        return head;
+    }
+
+
+    // Given an m x n matrix board where each cell is a battleship 'X' or empty '.', return the number of the battleships on board.
+    //
+    //Battleships can only be placed horizontally or vertically on board. In other words, they can only be made of the shape 1 x k (1 row, k columns) or k x 1 (k rows, 1 column),
+    // where k can be of any size. At least one horizontal or vertical cell separates between two battleships (i.e., there are no adjacent battleships).
+
+    public static int p41(char[][] board){
+
+        return 0;
+
+    }
 
 }
