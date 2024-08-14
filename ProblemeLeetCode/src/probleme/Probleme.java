@@ -835,4 +835,118 @@ public class Probleme {
 
     }
 
+    //Given an integer array nums of unique elements, return all possible
+    //subsets
+    // (the power set).
+    //
+    //The solution set must not contain duplicate subsets. Return the solution in any order.???
+
+
+
+    //Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+    public static void p42(int[] nums){
+
+        int k =0;
+
+        for(int i =0; i < nums.length;i++){
+            if(nums[i] != 0){
+                nums[k] = nums[i];
+                k++;
+            }
+
+        }
+
+        for(int i = k; i < nums.length;i++){
+            nums[i] = 0;
+        }
+
+    }
+
+
+    // Given two integer arrays nums1 and nums2, return an array of their
+    //intersection
+    //. Each element in the result must be unique and you may return the result in any order.
+    public static int[] p43(int[] nums1, int[] nums2) {
+
+
+        int[] list = new int[1001];
+
+
+        for(int nums : nums1){
+            list[nums]++;
+        }
+
+
+        for(int nums: nums2){
+            if(list[nums] == 1){
+                list[nums] = 3;
+            }
+
+            if(list[nums] == 2){
+                list[nums] = 4;
+            }
+        }
+
+
+        List<Integer> rez = new ArrayList<>();
+        for(int i =0;i<list.length;i++){
+            if(list[i]== 3){
+                rez.add(i);
+            }
+            if(list[i]== 4){
+                rez.add(i);
+                rez.add(i);
+            }
+        }
+
+        int[] f = new int[rez.size()];
+
+        for(int i =0; i < f.length;i++){
+            f[i] = rez.get(i);
+        }
+        return f;
+
+
+    }
+
+    
+    //Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
+    public static int[] p44(int[] nums1, int[] nums2){
+
+        List<Integer> rez = new ArrayList<>();
+
+        int i = 0, j = 0;
+
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+
+        while (i < nums1.length && j < nums2.length) {
+
+            if (nums1[i] < nums2[j]) {
+                i++;
+            } else if (nums2[j] < nums1[i]) {
+                j++;
+            } else {  // nums1[i] == nums2[j]
+                rez.add(nums1[i]);
+                i++;
+                j++;
+            }
+        }
+
+        int[] f = new int[rez.size()];
+
+
+        for (int k = 0; k < f.length; k++) {
+            f[k] = rez.get(k);
+        }
+
+        return f;
+
+    }
+
+
+
+
+
+
 }
