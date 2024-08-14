@@ -1,5 +1,6 @@
 package probleme;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Probleme {
@@ -945,7 +946,143 @@ public class Probleme {
     }
 
 
+    //You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+    //
+    //Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+    public static void p45(int[] nums1, int m, int[] nums2, int n){
 
+        int i =0, j =0 ;
+
+        for( i =m; i < nums1.length;i++){
+            if(nums1[i] == 0){
+                nums1[i] = nums2[j];
+                j++;
+            }
+        }
+        Arrays.sort(nums1);
+    }
+
+
+    //Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+    public static int p46(int n){
+
+        if(n == 0 || n == 1){
+            return 1;
+        }
+
+        return p46(n-1) + p46(n-2);
+
+    }
+
+
+    //You are given an array prices where prices[i] is the price of a given stock on the ith day.
+    //
+    //You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+    //
+    //Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+    public static int p47(int[] prices){
+
+        int buy = prices[0];
+        int profit = 0;
+
+
+        for(int i =0 ; i < prices.length;i++){
+            if(prices[i] < buy){
+                buy = prices[i];
+            }
+
+            profit = Math.max(profit, prices[i] - buy);
+
+
+        }
+        return profit;
+    }
+
+
+    //Given an integer array nums, find three numbers whose product is maximum and return the maximum product.
+    public static int p48(int[] nums){
+
+        int p = 1;
+        int ct = 0;
+
+        Arrays.sort(nums);
+
+        for(int i = nums.length-1; i >= 0; i--){
+            if( ct == 3){
+                break;
+            }
+            p *= nums[i];
+            ct++;
+        }
+        return p;
+
+    }
+
+
+    //There is a robot starting at the position (0, 0), the origin, on a 2D plane. Given a sequence of its moves, judge if this robot ends up at (0, 0) after it completes its moves.
+    //
+    //You are given a string moves that represents the move sequence of the robot where moves[i] represents its ith move. Valid moves are 'R' (right), 'L' (left), 'U' (up), and 'D' (down).
+    public static boolean p49(String moves){
+
+
+        int x =0;
+        int y =0;
+
+        for(int i =0;i < moves.length();i++){
+            if(moves.charAt(i) == 'U'){
+                x++;
+            }
+            if(moves.charAt(i) == 'D'){
+                x--;
+            }
+            if(moves.charAt(i) == 'L'){
+                y++;
+            }
+            if(moves.charAt(i) == 'R'){
+                y--;
+            }
+        }
+
+        return x == 0 && y == 0;
+
+    }
+
+    //A self-dividing number is a number that is divisible by every digit it contains.
+    //
+    //For example, 128 is a self-dividing number because 128 % 1 == 0, 128 % 2 == 0, and 128 % 8 == 0.
+    //A self-dividing number is not allowed to contain the digit zero.
+    public static List<Integer> p50(int left, int right){
+
+        List<Integer> list = new ArrayList<>();
+
+        for(int i = left; i <= right;i++){
+            if(selfDividing(i)){
+                list.add(i);
+            }
+        }
+        return list;
+    }
+
+    public static boolean selfDividing(int n) {
+
+        int divisor = 1;
+        while (n / divisor >= 10) {
+            divisor *= 10;
+        }
+
+
+        while (divisor > 0) {
+            int digit = (n / divisor) % 10;
+
+            if (digit == 0 || n % digit != 0) {
+                return false;
+            }
+
+            divisor /= 10;
+        }
+
+        return true;
+    }
 
 
 

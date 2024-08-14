@@ -5,10 +5,10 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
 
-        int[] t = {1,2,2,1};
+        int[] t = {7,1,5,3,6,4};
         int[] t1 = {2,2};
 
-        System.out.println((Arrays.toString(Probleme.p44(t, t1))));
+        System.out.println(Probleme.p50(1,22));
 
 
     }
