@@ -1085,5 +1085,195 @@ public class Probleme {
     }
 
 
+    //The complement of an integer is the integer you get when you flip all the 0's to 1's and all the 1's to 0's in its binary representation.
+    public static int p51(int num){
+
+        String n = Integer.toBinaryString(num);
+
+        StringBuilder modifiedString = new StringBuilder(n);
+
+        for (int i = 0; i < modifiedString.length(); i++) {
+            if (modifiedString.charAt(i) == '1') {
+                modifiedString.setCharAt(i, '0');
+            }else if(modifiedString.charAt(i) == '0'){
+                modifiedString.setCharAt(i, '1');
+            }
+        }
+
+        return Integer.parseInt(modifiedString.toString(), 2);
+
+    }
+
+
+    //You are given a string s representing an attendance record for a student where each character signifies whether the student was absent, late, or present on that day. The record only contains the following three characters:
+    //
+    //'A': Absent.
+    //'L': Late.
+    //'P': Present.
+    //The student is eligible for an attendance award if they meet both of the following criteria:
+    //
+    //The student was absent ('A') for strictly fewer than 2 days total.
+    //The student was never late ('L') for 3 or more consecutive days.
+    //Return true if the student is eligible for an attendance award, or false otherwise.
+
+    public static boolean p52(String s){
+
+        int absent =0;
+        int late = 0;
+
+
+        for(int i =0; i < s.length();i++){
+            char c = s.charAt(i);
+
+            if( c == 'L'){
+                late++;
+                if(late >= 3){
+                    return false;
+                }
+            }else if(c =='A'){
+                late = 0;
+                absent++;
+                if(absent>=2){
+                    return false;
+                }
+            }else{
+                late = 0;
+            }
+        }
+
+        return true;
+    }
+
+
+//Given an array nums with n integers, your task is to check if it could become non-decreasing by modifying at most one element.
+    public static boolean p53(int[] nums){
+
+        int ct = 0;
+
+        for(int i =0; i  < nums.length-1;i++){
+            if(nums[i] > nums[i+1]){
+                ct++;
+                if(ct>1){
+                    return false;
+                }
+
+                if(i > 0 && nums[i-1]>nums[i+1]){
+                    nums[i+1] = nums[i];
+                }
+            }
+
+        }
+    return true;
+
+    }
+
+
+    //Given a positive integer, check whether it has alternating bits: namely, if two adjacent bits will always have different values.
+    public static boolean p54(int n){
+
+        String b = Integer.toBinaryString(n);
+
+        for(int i =0; i < b.length()-1;i++){
+            if(b.charAt(i) == b.charAt(i+1)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    //You are given a string s.
+    //
+    //Your task is to remove all digits by doing this operation repeatedly:
+    //
+    //Delete the first digit and the closest non-digit character to its left.
+    //Return the resulting string after removing all digits.
+    public static String p55(String s){
+
+        Stack<Character> stack = new Stack<>();
+
+        for(Character c : s.toCharArray()){
+            if(c >= 'a' && 'z' >= c){
+                stack.push(c);
+            }else{
+                stack.pop();
+            }
+        }
+
+        StringBuilder rez = new StringBuilder();
+
+        while(!stack.isEmpty()){
+            rez.append(stack.pop());
+
+        }
+        return rez.reverse().toString();
+
+    }
+
+
+    //Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
+    public static int[] p56(int[] temperatures){
+
+        Stack<Integer> stack = new Stack<>();
+        int[] result = new int[temperatures.length];
+
+        for(int i =0;i < temperatures.length;i++){
+            while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]){
+                int idx = stack.pop();
+                result[idx] = i - idx;
+            }
+
+            stack.push(i);
+        }
+        return result;
+
+    }
+
+
+    //You are given an integer array prices where prices[i] is the price of the ith item in a shop.
+    //
+    //There is a special discount for items in the shop. If you buy the ith item, then you will receive a discount equivalent to prices[j] where j is the minimum index such that j > i and prices[j] <= prices[i]. Otherwise, you will not receive any discount at all.
+    public static int[] p57(int[] prices){
+
+        Stack<Integer> stack =new Stack<>();
+        int[] rez = prices;
+
+        for(int i =0; i < prices.length;i++){
+            while(!stack.isEmpty() && prices[i] <= prices[stack.peek()]){
+                int price = prices[stack.peek()] - prices[i];
+                rez[stack.pop()] = price;
+            }
+
+            stack.push(i);
+        }
+        return rez;
+    }
+
+
+    //You are given a string s consisting only of uppercase English letters.
+    //
+    //You can apply some operations to this string where, in one operation, you can remove any occurrence of one of the substrings "AB" or "CD" from s.
+    public static int p58(String s){
+
+        StringBuilder s1=new StringBuilder(s);
+        while(true)
+        {
+            boolean checker=true;
+            for(int i=0;i<s1.length()-1;i++)
+            {
+                char a=s1.charAt(i);
+                char b=s1.charAt(i+1);
+                if((a=='A' && b=='B')||(a=='C' && b=='D')){
+                    s1.deleteCharAt(i);
+                    s1.deleteCharAt(i);
+                    checker=false;
+                }
+            }
+            if(checker) break;
+        }
+        return s1.length();
+
+    }
+
 
 }
