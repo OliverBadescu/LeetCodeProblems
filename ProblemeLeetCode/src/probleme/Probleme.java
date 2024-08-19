@@ -1276,4 +1276,64 @@ public class Probleme {
     }
 
 
+    //You have n coins and you want to build a staircase with these coins. The staircase consists of k rows where the ith row has exactly i coins. The last row of the staircase may be incomplete.
+    //
+    //Given the integer n, return the number of complete rows of the staircase you will build.
+    public static int p59(int n){
+
+        int rez = n;
+        int d = -1;
+        int ct =-1;
+
+        while(rez >= 0){
+            rez =rez+ d;
+            d--;
+            ct++;
+        }
+
+        return ct;
+
+    }
+
+
+    //You are keeping the scores for a baseball game with strange rules. At the beginning of the game, you start with an empty record.
+    //
+    //You are given a list of strings operations, where operations[i] is the ith operation you must apply to the record and is one of the following:
+    //
+    //An integer x.
+    //Record a new score of x.
+    //'+'.
+    //Record a new score that is the sum of the previous two scores.
+    //'D'.
+    //Record a new score that is the double of the previous score.
+    //'C'.
+    //Invalidate the previous score, removing it from the record.
+    //Return the sum of all the scores on the record after applying all the operations.
+    public static int p60(String[] operations){
+
+        Stack<Integer> stack = new Stack<>();
+
+        int score = 0;
+
+        for(int i =0; i < operations.length;i++){
+            if(operations[i].equals("C")){
+                stack.pop();
+            }else if(operations[i].equals("D")){
+                stack.push(stack.peek()*2);
+            }else if(operations[i].equals("+")){
+                int temp = stack.pop();
+                int temp2 = stack.peek();
+                stack.push(temp);
+                stack.push(temp + temp2);
+            }else{
+                stack.push(Integer.parseInt(operations[i]));
+            }
+
+        }
+        while(!stack.isEmpty()){
+            score += stack.pop();
+        }
+        return score;
+    }
+
 }
