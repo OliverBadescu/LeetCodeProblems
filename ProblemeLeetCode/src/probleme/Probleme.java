@@ -1,6 +1,5 @@
 package probleme;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Probleme {
@@ -1336,4 +1335,66 @@ public class Probleme {
         return score;
     }
 
+
+    //You are given a 0-indexed string s typed by a user. Changing a key is defined as using a key different from the last used key. For example, s = "ab" has a change of a key while s = "bBBb" does not have any.
+    public static int p61(String s){
+
+        int ct =0;
+
+        for(int i =0;i < s.length()-1;i++){
+            char temp = s.charAt(i);
+            if(Character.toLowerCase(temp) != Character.toLowerCase(s.charAt(i+1))){
+                ct++;
+            }
+        }
+        return ct;
+    }
+
+
+    //You are given an array nums consisting of positive integers.
+    //
+    //Return the total frequencies of elements in nums such that those elements all have the maximum frequency
+    public static int p62(int[] nums) {
+        int sum = 0;
+
+        int[] f = new int[1001];
+
+        for (int i = 0; i < nums.length; i++) {
+            f[nums[i]]++;
+        }
+
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < 1001; i++) {
+            if (f[i] != 0 && max < f[i]) {
+                max = f[i];
+
+            }
+        }
+
+
+        for(int i =0; i < f.length;i++){
+            if(f[i] == max){
+                sum += max;
+            }
+        }
+
+
+        return sum;
+    }
+
+    //You are given a 0-indexed array mountain. Your task is to find all the peaks in the mountain array.
+    public static List<Integer> p63(int[] mountain){
+
+        List<Integer> rez = new ArrayList<>();
+
+        for(int i = 1; i< mountain.length-1; i++){
+
+            if(mountain[i] > mountain[i-1] && mountain[i] > mountain[i+1]){
+                rez.add(i);
+            }
+
+        }
+        return rez;
+    }
 }
