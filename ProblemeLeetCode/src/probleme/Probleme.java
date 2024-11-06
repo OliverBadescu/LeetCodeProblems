@@ -1397,4 +1397,136 @@ public class Probleme {
         }
         return rez;
     }
+
+
+    //Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.
+
+    public int[] p64(int n) {
+        int[] rez = new int[n+1];
+
+
+        for(int i =0; i<= n;i++){
+            rez[i] = nrOf1s(i);
+        }
+
+        return rez;
+    }
+
+    private int nrOf1s(int n){
+        String rez = Integer.toBinaryString(n);
+
+        int ct = 0;
+
+        for(int i =0; i < rez.length();i++){
+            if(rez.charAt(i) == '1'){
+                ct++;
+            }
+        }
+        return ct;
+    }
+
+    //Given an integer array nums of size n, return the minimum number of moves required to make all array elements equal.
+    //
+    //In one move, you can increment n - 1 elements of the array by 1.
+
+    public int p65(int[] nums){
+
+        int ct = 0;
+
+        Arrays.sort(nums);
+        int start = nums[0];
+        for (int num : nums) {
+            ct += num - start;
+        }
+
+        return ct;
+    }
+
+
+    //Given a string word, compress it using the following algorithm:
+    //
+    //Begin with an empty string comp. While word is not empty, use the following operation:
+    //Remove a maximum length prefix of word made of a single character c repeating at most 9 times.
+    //Append the length of the prefix followed by c to comp.
+    //Return the string comp.
+    public String p66(String word) {
+        StringBuilder comp = new StringBuilder();
+        int cnt = 1, n = word.length();
+        char ch = word.charAt(0);
+        for (int i = 1; i < n; i++) {
+            if (word.charAt(i) == ch && cnt < 9) {
+                cnt++;
+            } else {
+                comp.append(cnt).append(ch);
+                ch = word.charAt(i);
+                cnt = 1;
+            }
+        }
+        comp.append(cnt).append(ch);
+        return comp.toString();
+    }
+
+
+    //You are given a 0-indexed array of integers nums of length n. You are initially positioned at nums[0].
+    //
+    //Each element nums[i] represents the maximum length of a forward jump from index i. In other words, if you are at nums[i], you can jump to any nums[i + j] where:
+    //
+    //0 <= j <= nums[i] and
+    //i + j < n
+    //Return the minimum number of jumps to reach nums[n - 1]. The test cases are generated such that you can reach nums[n - 1].
+
+    public int p67(int[] nums) {
+
+
+        int near = 0, far = 0, jumps = 0;
+
+        while (far < nums.length - 1) {
+            int farthest = 0;
+            for (int i = near; i <= far; i++) {
+                farthest = Math.max(farthest, i + nums[i]);
+            }
+            near = far + 1;
+            far = farthest;
+            jumps++;
+        }
+
+        return jumps;
+    }
+
+
+    //At a lemonade stand, each lemonade costs $5. Customers are standing in a queue to buy from you and order one at a time (in the order specified by bills).
+    // Each customer will only buy one lemonade and pay with either a $5, $10, or $20 bill.
+    // You must provide the correct change to each customer so that the net transaction is that the customer pays $5.
+
+    public boolean p68(int[] bills) {
+        int five = 0;
+        int ten = 0;
+
+        for (int bill : bills) {
+            if (bill == 5) {
+                five++;
+            } else if (bill == 10) {
+                if (five > 0) {
+                    five--;
+                } else {
+                    return false;
+                }
+                ten++;
+            } else { // bill == 20
+                if (five > 0 && ten > 0) {
+                    five--;
+                    ten--;
+                } else if (five >= 3) {
+                    five -= 3;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
 }
+
+
